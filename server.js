@@ -46,12 +46,22 @@ mongoose.Promise = Promise;
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines';
 
 // connect to the MongoDB
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI)
+.then(response => {
+    console.log('Successfully connected to Mongo database');;
+})
+.catch(err => {
+    console.error(err);
+});
 
 // =====================================================================================
 // ROUTES
 // =====================================================================================
 app.get('/', (req, res) => {
+    models.Article.remove({}, function(err) {
+        console.log('collection removed')
+    });
+
     var resultArr = [];
     axios.get('https://news.ycombinator.com')
     .then(response => {

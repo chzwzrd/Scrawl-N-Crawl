@@ -26,7 +26,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form class="navbar-form">
-                    <button id="scrape-btn" type="button" class="btn btn-info">Scrape New Articles!</button>
+                    <button id="scrape-btn" type="button" class="btn btn-info" data-toggle="modal" data-target="#scrapeModal">Scrape New Articles!</button>
                 </form>
             </ul>
         </div>
@@ -34,6 +34,7 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+
 <div class="jumbotron text-center">
     <div class="overlay"></div>
     <div class="background-img"></div>
@@ -49,8 +50,8 @@
             <div class="panel-heading">
                 <h3>
                     <a href="{{this.link}}" target="_blank" class="article-link">{{this.title}}</a>
-                    <button id="save-article-btn" type="button" class="btn btn-info" data-toggle="modal" data-target="#scrapeModal">Save</button>
                 </h3>
+                <button id="save-article-btn" type="button" class="btn btn-default">Save</button>
             </div>
             <div class="panel-body">
                 <p>Summary</p>
@@ -60,7 +61,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="scrapeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+{{!-- <div class="modal fade" id="scrapeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -68,8 +69,8 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<footer class="footer navbar-fixed-bottom">
+<footer class="footer">
         <span class="text-muted text-center">&copy; 2018 Melodie Chi &bull; Hacker News Mongoose Scraper</span>
 </footer>
