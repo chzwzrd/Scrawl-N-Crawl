@@ -2,8 +2,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-toggle"
-                aria-expanded="true">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-toggle" aria-expanded="true">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -11,17 +10,17 @@
             </button>
             <a class="navbar-brand" href="/">Mongoose Scraper</a>
         </div>
-        
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-toggle">
             <ul class="nav navbar-nav">
+                <li>
+                    <a href="/">Home</a>
+                </li>
                 <li class="active">
-                    <a href="/">Home
+                    <a href="/saved">Saved Articles
                         <span class="sr-only">(current)</span>
                     </a>
-                </li>
-                <li>
-                    <a href="/saved">Saved Articles</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -38,38 +37,15 @@
     <div class="overlay"></div>
     <div class="background-img"></div>
     <div class="caption">
-        <h1>Mongoose Scraper</h1>
+        <h1>Saved Articles</h1>
         <p>Hacker News Edition</p>
     </div>
 </div>
 
 <div class="container articles-div">
-    {{#each articles}}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3>
-                    <a href="{{this.link}}" target="_blank" class="article-link">{{this.title}}</a>
-                    <button id="save-article-btn" type="button" class="btn btn-info" data-toggle="modal" data-target="#scrapeModal">Save</button>
-                </h3>
-            </div>
-            <div class="panel-body">
-                <p>Summary</p>
-            </div>
-        </div>
-    {{/each}}
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="scrapeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">There are no new articles to scrape!</h4>
-            </div>
-        </div>
-    </div>
 </div>
 
 <footer class="footer navbar-fixed-bottom">
-        <span class="text-muted text-center">&copy; 2018 Melodie Chi &bull; Hacker News Mongoose Scraper</span>
+    <span class="text-muted text-center">&copy; 2018 Melodie Chi &bull; Hacker News Mongoose Scraper</span>
 </footer>
