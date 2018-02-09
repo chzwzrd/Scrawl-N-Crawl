@@ -66,16 +66,16 @@ body, html {
 
 .panel {
     margin-bottom: 30px;
-    border-color: #9898987d;
-    border-radius: 4px;
-    box-shadow: 0px 1px 30px rgba(177, 177, 177, 0.63);
+    border-color: #989898bd;
+    border-radius: 3px;
+    box-shadow: 0px 1px 20px rgba(177, 177, 177, 0.63);
 }
 
 .panel-heading {
-    background: #222222 !important;
+    background: rgb(136, 134, 129) !important;
     border-color: #a0a0a0;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .panel-heading h3 {
@@ -100,13 +100,14 @@ body, html {
     right: 65px;
     margin-top: 5px;
     /* border: none; */
-    background: black;
+    border-color: rgb(201, 201, 201);
+    background: rgba(46, 46, 46, 0.849);
     color: white;
 }
 
 .panel-heading #save-article-btn:hover {
-    background: rgb(245, 245, 245);
-    color: black;
+    background: rgb(24, 24, 24);
+    color: rgb(255, 255, 255);
 }
 
 .panel-body p {

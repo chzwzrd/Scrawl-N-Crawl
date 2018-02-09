@@ -20,7 +20,7 @@ const models = require('./models');
 // MIDDLEWARE
 // =====================================================================================
 // initialize express
-app = express();
+const app = express();
 
 // configure handlebars as view engine
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main' }));
@@ -47,8 +47,8 @@ var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines
 
 // connect to the MongoDB
 mongoose.connect(MONGODB_URI)
-.then(response => {
-    console.log('Successfully connected to Mongo database');;
+.then(() => {
+    console.log('Successfully connected to Mongo database');
 })
 .catch(err => {
     console.error(err);
@@ -58,8 +58,8 @@ mongoose.connect(MONGODB_URI)
 // ROUTES
 // =====================================================================================
 app.get('/', (req, res) => {
-    models.Article.remove({}, function(err) {
-        console.log('collection removed')
+    models.Article.remove({}, () => {
+        console.log('collection removed');
     });
 
     var resultArr = [];
@@ -70,17 +70,19 @@ app.get('/', (req, res) => {
             var result = {};
             result.title = $(this).text();
             result.link = $(this).attr('href');
+            result.site = $(this).siblings('span').children('a').children('span').text();
             resultArr.push(result);
         });
 
-        // console.log(resultArr);
+        console.log(resultArr);
 
         models.Article.insertMany(resultArr)
         .then(dbArticles => {
             console.log(dbArticles);
         })
         .catch(err => {
-            return res.send(err);
+            // return res.send(err);
+            console.log(err);
         });
         res.render('index', { articles: resultArr });
     })
