@@ -1,6 +1,6 @@
 $(() => {
     $("#scrape-btn").on('click', () => {
-        axios.get('/')
+        axios.get('/scrape')
         .then(response => {
             console.log(response);
         })

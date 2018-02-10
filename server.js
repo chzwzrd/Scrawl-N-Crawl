@@ -58,37 +58,63 @@ mongoose.connect(MONGODB_URI)
 // ROUTES
 // =====================================================================================
 app.get('/', (req, res) => {
-    models.Article.remove({}, () => {
-        console.log('collection removed');
-    });
+    // models.Article.remove({}, () => {
+    //     console.log('collection removed');
+    // });
 
     var resultArr = [];
     axios.get('https://news.ycombinator.com')
     .then(response => {
         var $ = cheerio.load(response.data);
+
         $(".storylink").each(function(i, elem) {
-            var result = {};
-            result.title = $(this).text();
-            result.link = $(this).attr('href');
-            result.site = $(this).siblings('span').children('a').children('span').text();
-            resultArr.push(result);
+            models.Article.find({ title: $(this).text() })
+            .then(response => {
+                if (!response) {
+                    var result = {};
+                    result.title = $(this).text();
+                    result.link = $(this).attr('href');
+                    result.site = $(this).siblings('span').children('a').children('span').text();
+                    resultArr.push(result);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
         });
 
-        console.log(resultArr);
-
-        models.Article.insertMany(resultArr)
-        .then(dbArticles => {
-            console.log(dbArticles);
-        })
-        .catch(err => {
-            // return res.send(err);
-            console.log(err);
-        });
-        res.render('index', { articles: resultArr });
+        // console.log(resultArr);
+        
+        if (resultArr.length > 0) {
+            models.Article.insertMany(resultArr, { ordered: false })
+                .then(dbArticles => {
+                    console.log('insertMany should have succeeded');
+                    console.log(dbArticles);
+                })
+                .catch(err => {
+                    // return res.send(err); // both return & res.send (res sends the response back) end the function
+                    console.log(err);
+                });
+        } else {
+            console.log('No new articles!');
+        }
+        
     })
     .catch(err => {
         res.send(err);
     });
+
+    models.Article.find({})
+    .then(dbArticles => {
+        res.render('index', { articles: dbArticles });
+    })
+    .catch(err => {
+        res.send(err);
+    });
+});
+
+app.get('/scrape', (req, res) => {
+    
 });
 
 app.get('/saved', (req, res) => {

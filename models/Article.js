@@ -16,10 +16,10 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    points: {
-        type: Number,
-        required: true
-    },
+    // points: {
+    //     type: Number,
+    //     required: true
+    // },
     comment: {
         type: Schema.Types.ObjectId,
         ref: 'Comment'
