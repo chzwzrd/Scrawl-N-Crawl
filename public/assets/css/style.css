@@ -96,6 +96,7 @@ body, html {
 
 .panel-heading .article-link:visited {
     /* color: rgb(187, 231, 235); */
+    text-decoration: none;
     text-decoration: underline;
 }
 
@@ -165,6 +166,11 @@ body, html {
     background: rgb(6, 97, 133);
     background: rgb(190, 10, 85); */
     background: rgb(167, 167, 167);
+}
+
+.panel-body a:visited {
+    /* color: rgb(139, 135, 109); */
+    text-decoration: underline;
 }
 
 .panel-body p {
