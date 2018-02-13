@@ -51,7 +51,11 @@
                 <h3>
                     <a href="{{this.link}}" target="_blank" class="article-link">{{this.title}}</a>
                 </h3>
-                <button id="save-article-btn" type="button" class="btn btn-default">Save</button>
+                {{#if this.saved}}
+                    <button type="button" class="btn btn-default saved" data-id="{{this._id}}" disabled>Saved</button>
+                {{else}}
+                    <button type="button" class="btn btn-default save-article-btn" data-id="{{this._id}}" data-toggle="modal" data-target="#saveModal">Save</button>
+                {{/if}}
             </div>
             <div class="panel-body">
                 <p>Source: <a href="{{this.site}}" target="_blank">{{this.site}}</a></p>
@@ -60,17 +64,54 @@
     {{/each}}
 </div>
 
-<!-- Modal -->
-{{!-- <div class="modal fade" id="scrapeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Scrape Modal -->
+<div class="modal fade" id="scrapeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">There are no new articles to scrape!</h4>
+                <h4 class="modal-title" id="myModalLabel">Oops, this feature is still in progress. Stay tuned!</h4>
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
-<footer class="footer">
+<!-- Save Modal -->
+<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div id="article-saved-div">
+                <div class="modal-header">
+                    <h4 class="modal-title">Article saved!</h4>
+                    <button type="button" class="btn btn-primary add-note-btn">Add A Note</button>
+                </div>
+            </div>
+            
+            <div id="add-note-div">
+                <div class="modal-body">
+                    <form id="add-note-form">
+                        <div class="form-group">
+                            <label for="note-title">Title:</label>
+                            <input id="note-title" class="form-control" type="text" />
+                        </div>
+                        <div class="form-group">
+                            <label for="note-body">Note:</label>
+                            <textarea id="note-body" class="form-control" rows="10"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary save-note-btn">Save Note</button>
+                </div>
+            </div>
+
+            <div id="note-saved-div">
+                <h4 class="modal-title">Note saved!</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer navbar-fixed-bottom">
         <span class="text-muted text-center">&copy; 2018 Melodie Chi &bull; Hacker News Mongoose Scraper</span>
 </footer>

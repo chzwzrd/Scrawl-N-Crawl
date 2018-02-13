@@ -7,6 +7,10 @@ body, html {
     height: 100%;
 }
 
+/**
+** NAVBAR 
+**/
+
 #scrape-btn {
     background: #58c7c7;
 }
@@ -15,18 +19,9 @@ body, html {
     background: #53bbbb;
 }
 
-.modal-content {
-    width: 90%;
-    margin: auto;
-    margin-top: 200px;
-    padding: 40px;
-    text-align: center;
-}
-
-.modal-header  {
-    height: 100%;
-    border-bottom: none;
-}
+/**
+** MAIN 
+**/
 
 .jumbotron {
     position: relative;
@@ -64,6 +59,14 @@ body, html {
     text-align: center;
 }
 
+/**
+** ARTICLES 
+**/
+
+.articles-div {
+    margin-bottom: 60px;
+}
+
 .panel {
     margin-bottom: 30px;
     border-color: #989898bd;
@@ -76,6 +79,7 @@ body, html {
     border-color: #a0a0a0;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    position: relative;
 }
 
 .panel-heading h3 {
@@ -95,25 +99,186 @@ body, html {
     text-decoration: underline;
 }
 
-.panel-heading #save-article-btn {
+.panel-heading .save-article-btn {
     position: absolute;
-    right: 65px;
+    right: 20px;
     margin-top: 5px;
-    /* border: none; */
+    border: none;
     border-color: rgb(201, 201, 201);
     background: rgba(46, 46, 46, 0.849);
     color: white;
 }
 
-.panel-heading #save-article-btn:hover {
-    background: rgb(24, 24, 24);
+.panel-heading .save-article-btn:hover {
+    /* background: rgb(24, 24, 24); */
+    background: rgb(167, 167, 167);
     color: rgb(255, 255, 255);
+    border: none;
+}
+
+.panel-heading .saved {
+    position: absolute;
+    right: 20px;
+    margin-top: 5px;
+    background: rgb(49, 49, 49);
+    color: white;
+    cursor: default;
+    border: none;
+    opacity: 0.5;
+}
+
+.panel-heading .saved:hover {
+    background: rgb(49, 49, 49);
+    cursor: default;
+}
+
+.panel-heading .view-note-btn {
+    position: absolute;
+    right: 100px;
+    margin-top: 5px;
+    background: rgba(46, 46, 46, 0.849);
+    color: white;
+    border: none;
+}
+
+.panel-heading .view-note-btn:hover {
+    /* background: #222; */
+    /* background: rgb(165, 157, 137); */
+    background: rgb(167, 167, 167);
+}
+
+.panel-heading .unsave-btn {
+    position: absolute;
+    right: 20px;
+    margin-top: 5px;
+    background: rgba(46, 46, 46, 0.849);
+    color: white;
+    border: none;
+}
+
+.panel-heading .unsave-btn:hover {
+    /* background: rgb(11, 129, 197);
+    background: rgb(11, 175, 197);
+    background: rgb(8, 118, 133);
+    background: rgb(5, 83, 94);
+    background: rgb(5, 69, 94);
+    background: rgb(6, 97, 133);
+    background: rgb(190, 10, 85); */
+    background: rgb(167, 167, 167);
 }
 
 .panel-body p {
     color: #222222 !important;
     padding-left: 10px;
 }
+
+/**
+** MODAL 
+**/
+
+#scrapeModal .modal-content {
+    width: 90%;
+    margin: auto;
+    margin-top: 200px;
+    padding: 40px;
+    text-align: center;
+}
+
+#scrapeModal .modal-header {
+    height: 100%;
+    border-bottom: none;
+}
+
+#saveModal .modal-content {
+    margin-top: 100px;
+}
+
+#saveModal #article-saved-div .modal-header {
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+    border-bottom: none;
+}
+
+#saveModal #article-saved-div .modal-title {
+    margin-bottom: 20px;
+}
+
+#saveModal #add-note-div {
+   padding: 20px 20px 0;
+}
+
+#saveModal .modal-footer {
+    margin-top: -15px;
+    margin-bottom: 20px;
+    border-top: none;
+}
+
+#saveModal #note-saved-div {
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+}
+
+#viewNoteModal .modal-content {
+    margin-top: 80px;
+    padding: 20px;
+}
+
+#viewNoteModal .modal-body {
+    padding-bottom: 0;
+}
+
+#viewNoteModal .modal-footer {
+    border-top: none;
+}
+
+#viewNoteModal #note-updated-div {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+#unsaveModal .modal-content {
+    width: 80%;
+    margin: auto;
+    margin-top: 200px;
+    padding: 30px;
+    text-align: center;
+}
+
+#unsaveModal .modal-header {
+    height: 100%;
+    border-bottom: none;
+}
+
+#unsaveModal .modal-title {
+    margin-bottom: 20px;
+}
+
+#unsaveModal .unsave-yes-btn {
+    width: 100px;
+    padding: 8px 15px;
+    border: none;
+}
+
+#unsaveModal .unsave-no-btn {
+    width: 100px;
+    background-color: rgb(189, 1, 1);
+    padding: 8px 15px;
+    border: none;
+}
+
+#unsaveModal .unsave-no-btn:hover {
+    background-color: rgb(155, 1, 1);
+}
+
+/**
+** FOOTER
+**/
 
 .footer {
     width: 100%;

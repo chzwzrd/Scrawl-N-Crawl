@@ -58,67 +58,116 @@ mongoose.connect(MONGODB_URI)
 // ROUTES
 // =====================================================================================
 app.get('/', (req, res) => {
-    // models.Article.remove({}, () => {
-    //     console.log('collection removed');
-    // });
-
-    var resultArr = [];
-    axios.get('https://news.ycombinator.com')
-    .then(response => {
-        var $ = cheerio.load(response.data);
-
-        $(".storylink").each(function(i, elem) {
-            models.Article.find({ title: $(this).text() })
-            .then(response => {
-                if (!response) {
-                    var result = {};
-                    result.title = $(this).text();
-                    result.link = $(this).attr('href');
-                    result.site = $(this).siblings('span').children('a').children('span').text();
-                    resultArr.push(result);
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
-        });
-
-        // console.log(resultArr);
-        
-        if (resultArr.length > 0) {
-            models.Article.insertMany(resultArr, { ordered: false })
-                .then(dbArticles => {
-                    console.log('insertMany should have succeeded');
-                    console.log(dbArticles);
-                })
-                .catch(err => {
-                    // return res.send(err); // both return & res.send (res sends the response back) end the function
-                    console.log(err);
-                });
-        } else {
-            console.log('No new articles!');
-        }
-        
-    })
-    .catch(err => {
-        res.send(err);
-    });
-
     models.Article.find({})
     .then(dbArticles => {
         res.render('index', { articles: dbArticles });
     })
     .catch(err => {
-        res.send(err);
+        console.log(err);
     });
 });
 
 app.get('/scrape', (req, res) => {
-    
+
+    models.Article.remove({}, () => {
+        console.log('collection removed');
+    });
+
+    var resultArr = [];
+
+    axios.get('https://news.ycombinator.com')
+    .then(response => {
+        var $ = cheerio.load(response.data);
+
+        $(".storylink").each(function(i, elem) {
+            var result = {};
+            result.title = $(this).text();
+            result.link = $(this).attr('href');
+            result.site = $(this).siblings('span').children('a').children('span').text();
+            resultArr.push(result);
+        });
+
+        console.log('resultArr length 1:');
+        console.log(resultArr.length); // 30
+
+        models.Article.insertMany(resultArr)
+        .then(newArticles => {
+            res.send('scrape complete!');
+        })
+        .catch(err => {
+            console.log(err.message);
+            console.log(typeof err.message);
+            let dupTitle = err.message.split('\"');
+            console.log(dupTitle[1]);
+            if (err.message.includes('E11000')) {
+                // console.log('yo');
+                models.Article.find({ title: dupTitle[1] })
+                .then(dbArticle => {
+                    if (dbArticle) console.log(dbArticle);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            }
+        });
+
+    })
+    .catch(err => {
+        res.send(err);
+    });
+
+    // THIS WILL CONSOLE OUT 0 BECAUSE THE AXIOS GET REQUEST IS ASYNCHRONOUS!!!
+    console.log('resultArr length 2:');
+    console.log(resultArr.length);
 });
 
 app.get('/saved', (req, res) => {
-    res.render('saved');
+    models.Article.find({ saved: true })
+    .then(savedArticles => {
+        res.render('saved', { articles: savedArticles });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
+app.get('/api/articles/:id', (req, res) => {
+    id = req.params.id;
+    models.Article.findOneAndUpdate({ _id: id }, { saved: true }, { new: true })
+    .populate('note')
+    .then(dbArticle => {
+        res.send(dbArticle);
+    })
+    .catch(err => {
+        console.error(err);
+    });
+})
+
+app.post('/api/articles/:id', (req, res) => {
+    id = req.params.id;
+    models.Note.create(req.body)
+    .then(newNote => {
+        console.log(newNote);
+        return models.Article.findOneAndUpdate({ _id: id }, { note: newNote._id }, { new: true });
+    })
+    .then(updatedArticle => {
+        res.send(updatedArticle);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
+app.get('/api/unsave/:id', (req, res) => {
+    id = req.params.id;
+    models.Article.findOneAndUpdate({ _id: id }, { $unset: { note: '', saved: '' }}, { new: true })
+    .then(unsavedArticle => {
+        console.log(`article ${unsavedArticle._id} saved: ${unsavedArticle.saved}`);
+        res.send(unsavedArticle);
+    })
+    .catch(err => {
+        console.error(err);
+    });
 });
 
 // =====================================================================================

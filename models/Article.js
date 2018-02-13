@@ -4,25 +4,27 @@ const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
     title: {
         type: String,
-        // unique: true,
+        unique: true,
         required: true
     },
     link: {
         type: String,
-        // unique: true,
+        unique: true,
         required: true
     },
     site: {
-        type: String,
-        required: true
+        type: String
+    },
+    saved: {
+        type: Boolean
     },
     // points: {
     //     type: Number,
     //     required: true
     // },
-    comment: {
+    note: {
         type: Schema.Types.ObjectId,
-        ref: 'Comment'
+        ref: 'Note'
     }
 });
 
