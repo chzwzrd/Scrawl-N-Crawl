@@ -92,7 +92,8 @@ app.get('/scrape', (req, res) => {
 
         models.Article.insertMany(resultArr)
         .then(newArticles => {
-            res.send('scrape complete!');
+            console.log('scrape complete!');
+            res.redirect('/');
         })
         .catch(err => {
             console.log(err.message);
