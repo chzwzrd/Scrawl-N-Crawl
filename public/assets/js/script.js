@@ -1,5 +1,13 @@
 $(() => {
-    $("#initScrapeModal").modal();
+    let hasShownModal = localStorage.getItem('hasShownModal');
+    console.log(hasShownModal);
+    if (hasShownModal === null) {
+        localStorage.setItem('hasShownModal', 1);
+        $("#initScrapeModal").modal();
+    } else {
+        $("#initScrapeModal").css('display', 'none');
+    }
+    console.log(hasShownModal);
 
     // $("#scrape-btn").on('click', () => {
     //     axios.get('/scrape')
