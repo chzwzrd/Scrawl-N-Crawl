@@ -171,6 +171,18 @@ app.get('/api/unsave/:id', (req, res) => {
     });
 });
 
+app.get('/api/clear', (req, res) => {
+    models.Article.remove({})
+    .then(response => {
+        console.log('articles removed');
+        res.send('articles removed!');
+    })
+    .catch(err => {
+        console.log(err);
+        res.send(err);
+    });
+});
+
 // =====================================================================================
 // LISTENING
 // =====================================================================================
