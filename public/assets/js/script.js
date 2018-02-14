@@ -4,8 +4,6 @@ $(() => {
     if (hasShownModal === null) {
         localStorage.setItem('hasShownModal', 1);
         $("#initScrapeModal").modal();
-    } else {
-        $("#initScrapeModal").css('display', 'none');
     }
     console.log(hasShownModal);
 
@@ -160,13 +158,13 @@ $(() => {
 
 });
 
-$(window).unload(function() {
-    localStorage.removeItem('hasShownModal');
-    axios.get('/clear')
-    .then(response => {
-        console.log(response);
-    })
-    .catch(err => {
-        console.error(err);
-    });
-});
+// $(window).unload(function() {
+//     localStorage.removeItem('hasShownModal');
+//     axios.get('/api/clear')
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(err => {
+//         console.error(err);
+//     });
+// });
