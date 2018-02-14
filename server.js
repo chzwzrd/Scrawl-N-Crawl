@@ -173,9 +173,12 @@ app.get('/api/unsave/:id', (req, res) => {
 
 app.get('/api/clear', (req, res) => {
     models.Article.remove({})
-    .then(response => {
-        console.log('articles removed');
-        res.send('articles removed!');
+    .then(articleResponse => {
+       return models.Note.remove({});
+    })
+    .then(noteResponse => {
+        console.log('articles & notes removed!');
+        res.send('articles & notes removed!');
     })
     .catch(err => {
         console.log(err);
