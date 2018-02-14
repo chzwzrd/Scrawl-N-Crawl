@@ -7,6 +7,27 @@ body, html {
     height: 100%;
 }
 
+/* 
+** INIT SCRAPE MODAL
+*/
+
+#initScrapeModal .modal-content {
+    width: 90%;
+    margin: auto;
+    margin-top: 200px;
+    padding: 40px;
+    text-align: center;
+}
+
+#initScrapeModal .modal-header {
+    height: 100%;
+    border-bottom: none;
+}
+
+#emoji {
+    width: 20px;
+}
+
 /**
 ** NAVBAR 
 **/

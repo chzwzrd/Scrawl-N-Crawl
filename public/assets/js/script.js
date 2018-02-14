@@ -1,4 +1,6 @@
 $(() => {
+    $("#initScrapeModal").modal();
+
     // $("#scrape-btn").on('click', () => {
     //     axios.get('/scrape')
     //     .then(response => {
