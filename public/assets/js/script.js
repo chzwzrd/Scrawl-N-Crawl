@@ -1,8 +1,8 @@
 $(() => {
-    let hasShownModal = localStorage.getItem('hasShownModal');
+    let hasShownModal = sessionStorage.getItem('hasShownModal');
     console.log(hasShownModal);
     if (hasShownModal === null) {
-        localStorage.setItem('hasShownModal', 1);
+        sessionStorage.setItem('hasShownModal', 1);
         $("#initScrapeModal").modal();
     }
     console.log(hasShownModal);
