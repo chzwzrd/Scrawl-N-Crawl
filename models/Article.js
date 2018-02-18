@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
     title: {
         type: String,
-        unique: true,
+        unique: {
+            index: { unique: true }
+        },
         required: true
     },
     link: {

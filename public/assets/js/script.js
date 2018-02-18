@@ -7,16 +7,16 @@ $(() => {
     }
     console.log(hasShownModal);
 
-    // $("#scrape-btn").on('click', () => {
-    //     axios.get('/scrape')
-    //     .then(response => {
-    //         console.log(response);
-    //         // window.location.href = '/';
-    //     })
-    //     .catch(err => {
-    //         console.error(err);
-    //     });
-    // });
+    $("#scrape-btn").on('click', () => {
+        axios.get('/scrape')
+        .then(response => {
+            console.log('scrape successful');
+            // window.location.href = '/';
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    });
 
     $(".save-article-btn").on('click', function() {
         $("#article-saved-div").show();

@@ -69,9 +69,9 @@ app.get('/', (req, res) => {
 
 app.get('/scrape', (req, res) => {
 
-    models.Article.remove({}, () => {
-        console.log('collection removed');
-    });
+    // models.Article.remove({}, () => {
+    //     console.log('collection removed');
+    // });
 
     var resultArr = [];
 
@@ -96,20 +96,22 @@ app.get('/scrape', (req, res) => {
             res.redirect('/');
         })
         .catch(err => {
-            console.log(err.message);
-            console.log(typeof err.message);
-            let dupTitle = err.message.split('\"');
-            console.log(dupTitle[1]);
-            if (err.message.includes('E11000')) {
-                // console.log('yo');
-                models.Article.find({ title: dupTitle[1] })
-                .then(dbArticle => {
-                    if (dbArticle) console.log(dbArticle);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-            }
+            res.redirect('/');
+            throw err;
+            // console.log(err.message);
+            // console.log(typeof err.message);
+            // let dupTitle = err.message.split('\"');
+            // console.log(dupTitle[1]);
+            // if (err.message.includes('E11000')) {
+            //     // console.log('yo');
+            //     models.Article.find({ title: dupTitle[1] })
+            //     .then(dbArticle => {
+            //         if (dbArticle) console.log(dbArticle);
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //     });
+            // }
         });
 
     })
